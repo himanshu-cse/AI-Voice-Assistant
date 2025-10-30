@@ -17,7 +17,9 @@ load_dotenv()
 
 async def entrypoint(ctx: JobContext):
     await ctx.connect(auto_subscribe=AutoSubscribe.SUBSCRIBE_ALL)
+    print("Agent started, waiting for participant...")
     await ctx.wait_for_participant()
+    print("Participant joined! Starting session...")
     
     model = openai.realtime.RealtimeModel(
         model="gpt-4o-mini-audio-preview",
